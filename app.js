@@ -12,9 +12,11 @@ var app = express();
 var Pusher = require('pusher');
 
 var pusher = new Pusher({
-  appId: "320906",
-  key: "87ded5c4cb1e22c46dd4",
-  secret: "27b9eee608c2ddbb6f71"
+  appId: '320906',
+  key: '87ded5c4cb1e22c46dd4',
+  secret: '27b9eee608c2ddbb6f71',
+  cluster: 'ap2',
+  encrypted: true
 });
 
 // view engine setup
@@ -33,7 +35,7 @@ app.use('/users', users);
 
 app.post('/messages', function(req, res){
   var message = req.body;
-  pusher.trigger('messages', 'new_message', message);
+  pusher.trigger('my-channel', 'my-event', message);
   res.json({success: 200});
 });
 
